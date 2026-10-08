@@ -2,12 +2,16 @@
 
 ## b01_VoQuangHuy - So Diem
 
+### Domain của Vercell: 
+    pmnm-hocphan-orcin.vercel.app
+#### Deployment của Vercell
+    pmnm-hocphan-ku1d3drw0-vo-quang-huy.vercel.app
 Chạy:
 
     pip install flask
     flask --app sodiem run
 
-### Lệnh/URL đã kiểm thử
+##### Lệnh/URL đã kiểm thử
 
 | Chức năng | Lệnh / URL | Kết quả |
 |---|---|---|
