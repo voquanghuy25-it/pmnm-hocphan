@@ -1,6 +1,6 @@
 # Chương 3 - Flask căn bản
 
-## btap_VoQuangHuy - So Diem
+## b01_VoQuangHuy - So Diem
 
 Chạy:
 
