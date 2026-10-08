@@ -2,9 +2,9 @@
 
 ## b01_VoQuangHuy - So Diem
 
-### Domain của Vercell: 
+### Domain của Vercel: 
     pmnm-hocphan-orcin.vercel.app
-#### Deployment của Vercell
+#### Deployment của Vercel:
     pmnm-hocphan-ku1d3drw0-vo-quang-huy.vercel.app
 Chạy:
 
