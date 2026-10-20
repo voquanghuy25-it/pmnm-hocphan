@@ -1,0 +1,23 @@
+/* static/css/style.css */
+
+/* Đổi phông chữ toàn bộ trang */
+body {
+    font-family: 'Be Vietnam Pro', sans-serif;
+}
+
+/* Cho tất cả tiêu đề h1 màu đỏ */
+h1 {
+    color: red !important;
+    font-weight: 700;
+}
+
+/* Hiệu ứng di chuột (hover) vào menu trên Navbar -> Đổi chữ thành màu đỏ */
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: red !important;
+}
+
+/* Hiệu ứng di chuột vào các mục trong menu xổ xuống (Dropdown) -> Chữ màu đỏ */
+.dropdown-menu .dropdown-item:hover {
+    color: red !important;
+    background-color: #f8f9fa; /* Nền xám nhẹ khi hover */
+}

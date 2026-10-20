@@ -1,0 +1,45 @@
+<!-- templates/_navbar.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4 rounded">
+  <div class="container-fluid">
+    <!-- Sử dụng biến toàn cục {{ site_name }} -->
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-warning" href="{{ url_for('index') }}">
+      <img src="{{ url_for('static', filename='img/husc.svg') }}" alt="Logo" width="30" height="30">
+      <span>{{ site_name }}</span>
+    </a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <!-- Gọi trực tiếp hàm is_active('tên_route') -->
+        <li class="nav-item">
+          <a class="nav-link {{ is_active('index') }}" href="{{ url_for('index') }}">Trang chủ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ is_active('about') }}" href="{{ url_for('about') }}">Giới thiệu</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link {{ is_active('student_list') }}" href="{{ url_for('student_list') }}">Danh sách SV</a>
+        </li>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle {% if request.endpoint in ['api_students', 'search'] %}text-danger fw-bold{% endif %}" href="#" role="button" data-bs-toggle="dropdown">
+            Tiện ích
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item {{ is_active('api_students') }}" href="{{ url_for('api_students') }}" target="_blank">API Sinh viên (JSON)</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item {{ is_active('search') }}" href="{{ url_for('search') }}">Trang tìm kiếm nâng cao</a></li>
+          </ul>
+        </li>
+      </ul>
+      
+      <form class="d-flex" action="{{ url_for('search') }}" method="get">
+        <input class="form-control me-2" type="search" name="q" value="{{ q if q is defined else '' }}" placeholder="Tìm tên/MSSV...">
+        <button class="btn btn-outline-warning" type="submit">Tìm</button>
+      </form>
+    </div>
+  </div>
+</nav>

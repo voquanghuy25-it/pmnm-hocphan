@@ -1,0 +1,27 @@
+
+{% extends "base.html" %}
+
+{% block title %}Tìm Kiếm Sinh Viên{% endblock %}
+
+{% block content %}
+<h1>Tìm kiếm sinh viên</h1>
+
+<form method="get" action="{{ url_for('search') }}">
+    <input type="text" name="q" value="{{ q }}" placeholder="Họ tên hoặc MSSV">
+    <button type="submit">Tìm</button>
+</form>
+
+{% if q %}
+    <p>Tìm thấy {{ ket_qua|length }} kết quả cho "<b>{{ q }}</b>"</p>
+    
+    {% if ket_qua %}
+        <ul>
+            {% for r in ket_qua %}
+            <li>
+                <a href="{{ url_for('student_detail', mssv=r.mssv) }}">{{ r.mssv }}</a> - {{ r.name }} ({{ r.lop }})
+            </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endif %}
+{% endblock %}
