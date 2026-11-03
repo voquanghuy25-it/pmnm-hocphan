@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Tính Chỉ Số BMI{% endblock %}
+
+{% block content %}
+<style>
+    /* Màu chủ đạo mới cho trang BMI (Teal / Emerald) */
+    .bg-health {
+        background: linear-gradient(135deg, #0d9488, #10b981) !important;
+    }
+    .btn-health {
+        background-color: #0d9488;
+        border-color: #0d9488;
+        color: #ffffff;
+    }
+    .btn-health:hover {
+        background-color: #0f766e;
+        border-color: #0f766e;
+        color: #ffffff;
+    }
+    .form-control:focus {
+        border-color: #10b981;
+        box-shadow: 0 0 0 0.25rem rgba(16, 185, 129, 0.25);
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow border-0 rounded-3">
+            <!-- Header đổi sang dải màu gradient Xanh lá/Xanh ngọc -->
+            <div class="card-header bg-health text-white text-center py-3">
+                <h4 class="mb-0 fw-bold">TÍNH CHỈ SỐ BMI</h4>
+            </div>
+            <div class="card-body p-4">
+                
+                <form method="POST" action="/bmi">
+                    <!-- Chiều cao -->
+                    <div class="mb-3">
+                        <label for="cao" class="form-label fw-semibold">Chiều cao (cm)</label>
+                        <input type="text" 
+                               class="form-control {% if errors.get('cao') %}is-invalid{% endif %}" 
+                               id="cao" 
+                               name="cao" 
+                               placeholder="Ví dụ: 170"
+                               value="{{ values.get('cao', '') }}">
+                        {% if errors.get('cao') %}
+                            <div class="invalid-feedback">{{ errors.get('cao') }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Cân nặng -->
+                    <div class="mb-3">
+                        <label for="nang" class="form-label fw-semibold">Cân nặng (kg)</label>
+                        <input type="text" 
+                               class="form-control {% if errors.get('nang') %}is-invalid{% endif %}" 
+                               id="nang" 
+                               name="nang" 
+                               placeholder="Ví dụ: 65 hoặc 65,5"
+                               value="{{ values.get('nang', '') }}">
+                        {% if errors.get('nang') %}
+                            <div class="invalid-feedback">{{ errors.get('nang') }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Nút tính toán màu xanh mới -->
+                    <button type="submit" class="btn btn-health w-100 py-2 fw-bold mt-2">
+                        TÍNH BMI
+                    </button>
+                </form>
+
+                <!-- Kết quả hiển thị màu theo phân loại BMI -->
+                {% if bmi is not none %}
+                    <hr class="my-4">
+                    <div class="alert alert-{{ mau_sac }} text-center mb-0 shadow-sm" role="alert">
+                        <h5 class="alert-heading fw-bold mb-2">KẾT QUẢ SỨC KHỎE</h5>
+                        <div class="fs-4 fw-bold my-1">
+                            BMI: <span>{{ bmi }}</span>
+                        </div>
+                        <div class="fs-5 fw-semibold mt-1">
+                            Phân loại: <span class="badge bg-{{ mau_sac }} fs-6">{{ phan_loai }}</span>
+                        </div>
+                        {% if can_nang_nen_co %}
+                            <div class="small mt-2 text-muted">
+                                Cân nặng nên có: <strong>{{ can_nang_nen_co }}</strong>
+                            </div>
+                        {% endif %}
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

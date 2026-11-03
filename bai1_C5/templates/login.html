@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Đăng Nhập{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        
+        <!-- Hiển thị thông báo Flash -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, msg in messages %}
+                    <div class="alert alert-{{ category if category != 'message' else 'info' }} alert-dismissible fade show" role="alert">
+                        {{ msg }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header bg-primary text-white text-center py-3">
+                <h4 class="mb-0 fw-bold">ĐĂNG NHẬP</h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="/login">
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Tên đăng nhập</label>
+                        <input type="text" class="form-control" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Mật khẩu</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">ĐĂNG NHẬP</button>
+                   
+                </form>
+                <p class="text-center mt-3 mb-0">
+                        Chưa có tài khoản? <a href="{{ url_for('register') }}">Đăng ký ngay</a>
+                </p>
+                {% if message %}
+                    <div class="alert alert-info mt-3 text-center mb-0">{{ message }}</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

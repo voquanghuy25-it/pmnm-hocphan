@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Máy Tính Bỏ Túi{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card shadow-sm border-0 rounded-3">
+            <div class="card-header bg-primary text-white text-center py-3">
+                <h4 class="mb-0 fw-bold">MÁY TÍNH BỎ TÚI</h4>
+            </div>
+            <div class="card-body p-4">
+                
+                <form method="POST" action="/">
+                    <!-- Số a -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Số a:</label>
+                        <input type="text" class="form-control {% if errors.a %}is-invalid{% endif %}" name="a" value="{{ values.a }}">
+                        {% if errors.a %}
+                            <div class="invalid-feedback">{{ errors.a }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Phép toán -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Phép toán:</label>
+                        <select name="op" class="form-select {% if errors.op %}is-invalid{% endif %}">
+                            <option value="+" {% if values.op == '+' %}selected{% endif %}>Cộng (+)</option>
+                            <option value="-" {% if values.op == '-' %}selected{% endif %}>Trừ (-)</option>
+                            <option value="*" {% if values.op == '*' %}selected{% endif %}>Nhân (*)</option>
+                            <option value="/" {% if values.op == '/' %}selected{% endif %}>Chia (/)</option>
+                        </select>
+                        {% if errors.op %}
+                            <div class="invalid-feedback">{{ errors.op }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Số b -->
+                    <div class="mb-3">
+                        <label class="form-label fw-semibold">Số b:</label>
+                        <input type="text" class="form-control {% if errors.b %}is-invalid{% endif %}" name="b" value="{{ values.b }}">
+                        {% if errors.b %}
+                            <div class="invalid-feedback">{{ errors.b }}</div>
+                        {% endif %}
+                    </div>
+
+                    <button type="submit" class="btn btn-primary w-100 py-2 fw-bold mt-2">
+                        TÍNH KẾT QUẢ
+                    </button>
+                </form>
+
+                <!-- Hiển thị kết quả -->
+                {% if result is not none %}
+                    <hr class="my-4">
+                    <div class="alert alert-success text-center mb-0 shadow-sm" role="alert">
+                        <h5 class="alert-heading fw-bold mb-1">KẾT QUẢ</h5>
+                        <div class="fs-3 fw-bold text-primary">{{ result }}</div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
