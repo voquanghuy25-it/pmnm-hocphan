@@ -1,0 +1,43 @@
+
+{% extends "base.html" %}
+
+{% block title %}Danh Sách Sinh Viên{% endblock %}
+
+{% block content %}
+<h1>Danh sách sinh viên</h1>
+
+<p>
+    <b>Lọc theo lớp:</b> 
+    <a href="{{ url_for('student_list') }}">Tất cả</a>
+    {% for l in ds_lop %}
+        | <a href="{{ url_for('student_list', lop=l) }}">{{ l }}</a>
+    {% endfor %}
+</p>
+
+{% if not danh_sach %}
+    <p><i>Không có sinh viên phù hợp.</i></p>
+{% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>MSSV</th>
+                <th>Họ tên</th>
+                <th>Lớp</th>
+                <th>Điểm TB</th>
+                <th>Xếp loại</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sv in danh_sach %}
+            <tr>
+                <td><a href="{{ url_for('student_detail', mssv=sv.mssv) }}">{{ sv.mssv }}</a></td>
+                <td>{{ sv.name }}</td>
+                <td>{{ sv.lop }}</td>
+                <td>{{ sv.dtb_text }}</td>
+                <td>{{ sv.xep_loai }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}

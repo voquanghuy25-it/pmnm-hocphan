@@ -1,0 +1,44 @@
+
+{% extends "base.html" %}
+
+{% block title %}Chi Tiết Sinh Viên - {{ mssv }}{% endblock %}
+
+{% block content %}
+<h1>Chi tiết sinh viên</h1>
+<ul>
+    <li><b>Họ tên:</b> {{ sv.name }}</li>
+    <li><b>MSSV:</b> {{ mssv }}</li>
+    <li><b>Lớp:</b> <a href="{{ url_for('student_list', lop=sv.Lop) }}">{{ sv.Lop }}</a></li>
+    <li><b>Điểm TB:</b> {{ dtb_text }}</li>
+    <li><b>Xếp loại:</b> {{ xep_loai }}</li>
+</ul>
+
+<h3>Bảng điểm:</h3>
+{% if sv.scores %}
+    <table>
+        <thead>
+            <tr>
+                <th>Học phần</th>
+                <th>Điểm</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for hp, diem in sv.scores.items() %}
+            <tr>
+                <td>{{ hp }}</td>
+                <td>{{ diem }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p><i>Chưa có điểm.</i></p>
+{% endif %}
+
+<br>
+<p>
+    <a href="{{ url_for('export_scores', mssv=mssv) }}">Tải bảng điểm (CSV)</a> | 
+    Link rút gọn: <code>http://127.0.0.1:8000{{ url_for('short_link', mssv=mssv) }}</code>
+</p>
+<p><a href="{{ url_for('student_list') }}">← Quay lại danh sách sinh viên</a></p>
+{% endblock %}

@@ -1,0 +1,30 @@
+<!-- templates/_footer.html -->
+<footer class="mt-5 pt-4 border-top text-muted">
+  <div class="row align-items-center">
+    <div class="col-md-6 text-center text-md-start mb-2 mb-md-0">
+      <p class="mb-1 fw-semibold text-dark">Hệ thống {{ site_name }}</p>
+      <p class="small mb-0 text-secondary">
+        Phần mềm mã nguồn mở · Khoa Công nghệ Thông tin, Trường Đại học Khoa học, Đại học Huế
+      </p>
+    </div>
+    
+    <div class="col-md-6 text-center text-md-end">
+      <ul class="list-inline mb-1">
+        <li class="list-inline-item">
+          <a href="{{ url_for('index') }}" class="text-decoration-none small {% if request.endpoint == 'index' %}text-danger fw-bold{% else %}text-secondary{% endif %}">Trang chủ</a>
+        </li>
+        <li class="list-inline-item">·</li>
+        <li class="list-inline-item">
+          <a href="{{ url_for('about') }}" class="text-decoration-none small {% if request.endpoint == 'about' %}text-danger fw-bold{% else %}text-secondary{% endif %}">Giới thiệu</a>
+        </li>
+        <li class="list-inline-item">·</li>
+        <li class="list-inline-item">
+          <a href="{{ url_for('contact') }}" class="text-decoration-none small {% if request.endpoint == 'contact' %}text-danger fw-bold{% else %}text-secondary{% endif %}">Liên hệ</a>
+        </li>
+      </ul>
+      
+      <!-- Tự động hiển thị năm hiện tại và tên trang -->
+      <p class="small mb-0 text-muted">&copy; {{ current_year }} {{ site_name }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
