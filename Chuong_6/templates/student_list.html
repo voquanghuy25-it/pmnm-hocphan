@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Danh sách sinh viên</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    table { border-collapse: collapse; width: 100%; max-width: 700px; }
+    th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+    th { background: #f0f0f0; }
+    .good { color: green; font-weight: bold; }
+    .bad { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Danh sách sinh viên</h1>
+
+  <table>
+    <tr>
+      <th>STT</th>
+      <th>MSSV</th>
+      <th>Họ tên</th>
+      <th>GPA</th>
+    </tr>
+    {% for s in students %}
+    <tr>
+      <td>{{ loop.index }}</td>
+      <td>{{ s.mssv }}</td>
+      <td>{{ s.name }}</td>
+      <td class="{{ 'good' if s.gpa >= 8 else 'bad' if s.gpa < 5 else '' }}">
+        {{ "%.1f"|format(s.gpa) }}
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="4">Chưa có sinh viên. Hãy mở /them-mau trước.</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <p>Tổng: {{ students|length }} sinh viên</p>
+</body>
+</html>
