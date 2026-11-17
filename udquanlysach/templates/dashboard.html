@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dashboard</h1>
+<div class="cards">
+  <div class="card">Danh mục<b>{{ total_categories }}</b></div>
+  <div class="card">Đầu sách<b>{{ total_books }}</b></div>
+  <div class="card">Tổng số lượng<b>{{ total_quantity }}</b></div>
+  <div class="card">Giá trị tồn kho<b>{{ "{:,.0f}".format(total_value) }}</b></div>
+</div>
+
+<h2>Số đầu sách theo danh mục</h2>
+<table>
+  <tr><th>Danh mục</th><th>Số đầu sách</th><th></th></tr>
+  {% for cid, name, count in stats %}
+  <tr>
+    <td>{{ name }}</td><td>{{ count }}</td>
+    <td><a class="btn" href="{{ url_for('book_list', category_id=cid) }}">Xem sách</a></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="3">Chưa có danh mục.</td></tr>
+  {% endfor %}
+</table>
+
+<h2>5 sách mới nhất</h2>
+<table>
+  <tr><th>Tên sách</th><th>Tác giả</th><th>Danh mục</th><th>Giá</th></tr>
+  {% for b in latest_books %}
+  <tr>
+    <td>{{ b.title }}</td><td>{{ b.author or "—" }}</td>
+    <td>{{ b.category.name }}</td><td>{{ "{:,.0f}".format(b.price) }}</td>
+  </tr>
+  {% else %}
+  <tr><td colspan="4">Chưa có sách.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

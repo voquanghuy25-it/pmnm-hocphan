@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ "Sửa" if category else "Thêm" }} danh mục</h1>
+<form method="post" class="form-box">
+  <label>Tên danh mục</label>
+  <input name="name" required value="{{ request.form.get('name', category.name if category else '') }}">
+  <label>Mô tả</label>
+  <input name="description" value="{{ request.form.get('description', (category.description or '') if category else '') }}">
+  <p>
+    <button class="btn">Lưu</button>
+    <a class="btn gray" href="{{ url_for('category_list') }}">Hủy</a>
+  </p>
+</form>
+{% endblock %}

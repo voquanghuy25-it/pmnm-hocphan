@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ "Sửa" if book else "Thêm" }} sách</h1>
+<form method="post" class="form-box">
+  <label>Tên sách</label>
+  <input name="title" required value="{{ request.form.get('title', book.title if book else '') }}">
+  <label>Tác giả</label>
+  <input name="author" value="{{ request.form.get('author', (book.author or '') if book else '') }}">
+  <label>Giá</label>
+  <input type="number" step="any" min="0" name="price" value="{{ request.form.get('price', book.price if book else 0) }}">
+  <label>Số lượng</label>
+  <input type="number" min="0" name="quantity" value="{{ request.form.get('quantity', book.quantity if book else 0) }}">
+  <label>Danh mục</label>
+  <select name="category_id">
+    {% for c in categories %}
+    <option value="{{ c.id }}" {{ "selected" if c.id == category.id }}>{{ c.name }}</option>
+    {% endfor %}
+  </select>
+  <p>
+    <button class="btn">Lưu</button>
+    <a class="btn gray" href="{{ url_for('book_list', category_id=category.id) }}">Hủy</a>
+  </p>
+</form>
+{% endblock %}

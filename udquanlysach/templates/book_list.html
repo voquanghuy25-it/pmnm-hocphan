@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Sách – {{ category.name }}</h1>
+<p>
+  <a class="btn" href="{{ url_for('book_add', category_id=category.id) }}">+ Thêm sách</a>
+  <a class="btn gray" href="{{ url_for('category_list') }}">← Danh mục</a>
+</p>
+<table>
+  <tr><th>ID</th><th>Tên sách</th><th>Tác giả</th><th>Giá</th><th>SL</th><th>Thao tác</th></tr>
+  {% for b in books %}
+  <tr>
+    <td>{{ b.id }}</td><td>{{ b.title }}</td><td>{{ b.author or "—" }}</td>
+    <td>{{ "{:,.0f}".format(b.price) }}</td><td>{{ b.quantity }}</td>
+    <td>
+      <a class="btn gray" href="{{ url_for('book_edit', book_id=b.id) }}">Sửa</a>
+      <form class="inline" method="post" action="{{ url_for('book_delete', book_id=b.id) }}"
+            onsubmit="return confirm('Xóa sách này?');">
+        <button class="btn danger">Xóa</button>
+      </form>
+    </td>
+  </tr>
+  {% else %}
+  <tr><td colspan="6">Danh mục này chưa có sách.</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}
